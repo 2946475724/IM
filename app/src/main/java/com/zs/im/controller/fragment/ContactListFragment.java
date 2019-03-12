@@ -14,11 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.ui.EaseContactListFragment;
 import com.hyphenate.exceptions.HyphenateException;
 import com.zs.im.R;
 import com.zs.im.controller.activity.AddContactActivity;
+import com.zs.im.controller.activity.ChatActivity;
 import com.zs.im.controller.activity.InviteActivity;
 import com.zs.im.model.Model;
 import com.zs.im.model.bean.UserInfo;
@@ -75,6 +77,18 @@ public class ContactListFragment extends EaseContactListFragment {
         //获取邀请信息的条目对象
         ll_contact_invite = headerView.findViewById(R.id.ll_contact_invite);
 
+
+        //设置listview条目的点击事件
+        setContactListItemClickListener(new EaseContactListItemClickListener() {
+            @Override
+            public void onListItemClicked(EaseUser user) {
+                Intent intent = new Intent(getActivity(), ChatActivity.class);
+
+                //传递参数
+                intent.putExtra(EaseConstant.EXTRA_USER_ID,user.getUsername());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
