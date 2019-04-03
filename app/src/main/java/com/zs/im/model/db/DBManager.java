@@ -8,9 +8,10 @@ import com.zs.im.model.dao.InviteTableDao;
 //联系人和邀请信息表的操作类的管理类
 public class DBManager {
 
-    private final DBHelper dbHelper;
-    private final ContactTableDao contactTableDao;
-    private final InviteTableDao inviteTableDao;
+    private  DBHelper dbHelper;
+    private  ContactTableDao contactTableDao;
+    private  InviteTableDao inviteTableDao;
+
 
     public DBManager(Context context, String name) {
         //创建数据库
@@ -20,6 +21,9 @@ public class DBManager {
         contactTableDao = new ContactTableDao(dbHelper);
         inviteTableDao = new InviteTableDao(dbHelper);
 
+    }
+
+    public DBManager() {
     }
 
     //获取联系人表的操作类对象

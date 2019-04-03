@@ -25,7 +25,6 @@ public class InviteTableDao {
         //获取数据库连接
         SQLiteDatabase db = mhelper.getReadableDatabase();
 
-
         //执行添加语句
         ContentValues values = new ContentValues();
         values.put(InviteTable.COL_REASON, invitationInfo.getReason());  //原因
@@ -107,12 +106,18 @@ public class InviteTableDao {
         if (intStatus == InvitationInfo.InvitationStatus.NEW_GROUP_APPLICATION.ordinal()) {
             return InvitationInfo.InvitationStatus.NEW_GROUP_APPLICATION;
         }
-        if (intStatus == InvitationInfo.InvitationStatus.NEW_INVITE_ACCEPTED.ordinal()) {
-            return InvitationInfo.InvitationStatus.NEW_INVITE_ACCEPTED;
-        }
 
+        if (intStatus == InvitationInfo.InvitationStatus.GROUP_INVITE_ACCEPTED.ordinal()) {
+            return InvitationInfo.InvitationStatus.GROUP_INVITE_ACCEPTED;
+        }
         if (intStatus == InvitationInfo.InvitationStatus.GROUP_APPLICATION_ACCEPTED.ordinal()) {
             return InvitationInfo.InvitationStatus.GROUP_APPLICATION_ACCEPTED;
+        }
+        if (intStatus == InvitationInfo.InvitationStatus.GROUP_INVITE_DECLINED.ordinal()) {
+            return InvitationInfo.InvitationStatus.GROUP_INVITE_DECLINED;
+        }
+        if (intStatus == InvitationInfo.InvitationStatus.GROUP_APPLICATION_DECLINED.ordinal()) {
+            return InvitationInfo.InvitationStatus.GROUP_APPLICATION_DECLINED;
         }
         if (intStatus == InvitationInfo.InvitationStatus.GROUP_ACCEPT_INVITE.ordinal()) {
             return InvitationInfo.InvitationStatus.GROUP_ACCEPT_INVITE;
@@ -123,11 +128,8 @@ public class InviteTableDao {
         if (intStatus == InvitationInfo.InvitationStatus.GROUP_REJECT_APPLICATION.ordinal()) {
             return InvitationInfo.InvitationStatus.GROUP_REJECT_APPLICATION;
         }
-        if (intStatus == InvitationInfo.InvitationStatus.GROUP_INVITE_DECLINED.ordinal()) {
-            return InvitationInfo.InvitationStatus.GROUP_INVITE_DECLINED;
-        }
-        if (intStatus == InvitationInfo.InvitationStatus.GROUP_APPLICATION_DECLINED.ordinal()) {
-            return InvitationInfo.InvitationStatus.GROUP_APPLICATION_DECLINED;
+        if (intStatus == InvitationInfo.InvitationStatus.GROUP_REJECT_INVITE.ordinal()) {
+            return InvitationInfo.InvitationStatus.GROUP_REJECT_INVITE;
         }
         return null;
     }

@@ -21,6 +21,7 @@ import com.hyphenate.exceptions.HyphenateException;
 import com.zs.im.R;
 import com.zs.im.controller.activity.AddContactActivity;
 import com.zs.im.controller.activity.ChatActivity;
+import com.zs.im.controller.activity.GroupListActivity;
 import com.zs.im.controller.activity.InviteActivity;
 import com.zs.im.model.Model;
 import com.zs.im.model.bean.UserInfo;
@@ -35,6 +36,11 @@ import java.util.Map;
 
 // 联系人列表页面
 public class ContactListFragment extends EaseContactListFragment {
+
+    private ImageView iv_contact_red;
+    private LocalBroadcastManager mLBM;
+    private LinearLayout ll_contact_invite;
+    private String mHxid;
 
     private BroadcastReceiver ContactChangeReceiver = new BroadcastReceiver() {
         @Override
@@ -54,11 +60,14 @@ public class ContactListFragment extends EaseContactListFragment {
             //
         }
     };
-    private ImageView iv_contact_red;
-    private LocalBroadcastManager mLBM;
-    private LinearLayout ll_contact_invite;
-    private String mHxid;
-
+    private BroadcastReceiver GroupChangeReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //显示红点
+            iv_contact_red.setVisibility(View.VISIBLE);
+            SpUtils.getInstance().save(SpUtils.IS_NEW_INVITE,true);
+        }
+    };
 
     @Override
     protected void initView() {
@@ -77,15 +86,27 @@ public class ContactListFragment extends EaseContactListFragment {
         //获取邀请信息的条目对象
         ll_contact_invite = headerView.findViewById(R.id.ll_contact_invite);
 
-
         //设置listview条目的点击事件
         setContactListItemClickListener(new EaseContactListItemClickListener() {
             @Override
             public void onListItemClicked(EaseUser user) {
+                if(user == null){
+                    return;
+                }
+
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
 
                 //传递参数
                 intent.putExtra(EaseConstant.EXTRA_USER_ID,user.getUsername());
+                startActivity(intent);
+            }
+        });
+
+        View ll_contact_group = headerView.findViewById(R.id.ll_contact_group);
+        ll_contact_group.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), GroupListActivity.class);
                 startActivity(intent);
             }
         });
@@ -125,10 +146,10 @@ public class ContactListFragment extends EaseContactListFragment {
         mLBM = LocalBroadcastManager.getInstance(getActivity());
         mLBM.registerReceiver(ContactInviteChangeReceiver,new IntentFilter(Constant.CONTACT_INVITE_CHANGED));
         mLBM.registerReceiver(ContactChangeReceiver,new IntentFilter(Constant.CONTACT_CHANGED));
+        mLBM.registerReceiver(GroupChangeReceiver,new IntentFilter(Constant.GROUP_INVITE_CHANGED));
 
         //从环信服务器获取所有的联系人信息
         getContactFromHxServer();
-
 
         //绑定listview和contextmenu
         registerForContextMenu(listView);
@@ -145,7 +166,6 @@ public class ContactListFragment extends EaseContactListFragment {
 
         //添加布局
         getActivity().getMenuInflater().inflate(R.menu.delete, menu);
-
     }
 
     @Override
@@ -207,8 +227,8 @@ public class ContactListFragment extends EaseContactListFragment {
                     List<String> hxids = EMClient.getInstance().contactManager().getAllContactsFromServer();
 
                     //校验
-                    if(hxids != null && hxids.size() >=0){
-                        List<UserInfo> contacts = new ArrayList<UserInfo>();
+                    if(hxids != null && hxids.size() >= 0){
+                        List<UserInfo> contacts = new ArrayList<>();
                         //转换
                         for(String hxid : hxids){
                             UserInfo userInfo = new UserInfo(hxid);
@@ -218,7 +238,7 @@ public class ContactListFragment extends EaseContactListFragment {
                         //保存好友信息到本地数据库
                         Model.getInstance().getDBManager().getContactTableDao().saveContacts(contacts, true);
 
-                        if(getActivity() ==null){
+                        if(getActivity() == null){
                             return;
                         }
                         //刷新页面
@@ -267,5 +287,6 @@ public class ContactListFragment extends EaseContactListFragment {
 
         mLBM.unregisterReceiver(ContactInviteChangeReceiver);
         mLBM.unregisterReceiver(ContactChangeReceiver);
+        mLBM.unregisterReceiver(GroupChangeReceiver);
     }
 }

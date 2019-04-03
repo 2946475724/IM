@@ -26,11 +26,6 @@ public class SplashActivity extends Activity {
         };
 
         private void toMainOrLogin(){
-//            new Thread(){
-//                public void run(){
-//
-//                }
-//            }.start();
 
             Model.getInstance().getGlobalThreadPool().execute(new Runnable() {
                 @Override
@@ -77,4 +72,5 @@ public class SplashActivity extends Activity {
         //销毁消息
         handler.removeCallbacksAndMessages(null);
     }
+
 }

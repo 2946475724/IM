@@ -1,7 +1,6 @@
 package com.zs.im.controller.activity;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -35,6 +34,14 @@ public class AddContactActivity extends Activity {
         initListener();
     }
 
+    private void initView() {
+        tv_add_find = findViewById(R.id.tv_add_find);
+        et_add_name = findViewById(R.id.et_add_name);
+        rl_add = findViewById(R.id.rl_add);
+        tv_add_name = findViewById(R.id.tv_add_name);
+        bt_add_add = findViewById(R.id.bt_add_add);
+    }
+
     private void initListener() {
         //查找按钮的点击事件处理
         tv_add_find.setOnClickListener(new View.OnClickListener() {
@@ -59,26 +66,25 @@ public class AddContactActivity extends Activity {
 
         //校验输入的名称
         if (TextUtils.isEmpty(name)) {
-            Toast.makeText(AddContactActivity.this, "输入的用户名称不能为空", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddContactActivity.this, "输入的用户名不能为空", Toast.LENGTH_SHORT).show();
+        }else {
+            //去服务器判断当前用户是否存在
+            Model.getInstance().getGlobalThreadPool().execute(new Runnable() {
+                @Override
+                public void run() {
+                    //去服务器判断当前的用户是否存在
+                    userInfo = new UserInfo(name);
+                    //更新UI显示
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            rl_add.setVisibility(View.VISIBLE);
+                            tv_add_name.setText(userInfo.getName());
+                        }
+                    });
+                }
+            });
         }
-
-        //去服务器判断当前用户是否存在
-        Model.getInstance().getGlobalThreadPool().execute(new Runnable() {
-            @Override
-            public void run() {
-                //去服务器判断当前的用户是否存在
-                userInfo = new UserInfo(name);
-                //更新UI显示
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        rl_add.setVisibility(View.VISIBLE);
-                        tv_add_name.setText(userInfo.getName());
-                    }
-                });
-            }
-        });
-
     }
 
     //添加按钮处理
@@ -110,11 +116,5 @@ public class AddContactActivity extends Activity {
         });
     }
 
-    private void initView() {
-        tv_add_find = findViewById(R.id.tv_add_find);
-        et_add_name = findViewById(R.id.et_add_name);
-        rl_add = findViewById(R.id.rl_add);
-        tv_add_name = findViewById(R.id.tv_add_name);
-        bt_add_add = findViewById(R.id.bt_add_add);
-    }
+
 }

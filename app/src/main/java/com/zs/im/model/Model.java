@@ -56,8 +56,6 @@ public class Model {
         return dbManager;
     }
 
-
-
     //获取用户账号数据库的操作类的对象
     public UserAccountDao getUSerAccountDao(){
         return userAccountDao;

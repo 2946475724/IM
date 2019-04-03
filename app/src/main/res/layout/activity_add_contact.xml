@@ -3,62 +3,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.activity.AddContactActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".controller.activity.AddContactActivity">
 
     <RelativeLayout
-        android:background="@android:color/holo_blue_dark"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="60dp"
+        android:background="@android:color/holo_blue_dark">
+
         <TextView
-            android:text="添加联系人"
-            android:textSize="25sp"
-            android:layout_centerInParent="true"
-            android:textColor="@android:color/white"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="添加联系人"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+
         <TextView
             android:id="@+id/tv_add_find"
-            android:text="查找"
-            android:textSize="25sp"
-            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
+            android:text="查找"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
     </RelativeLayout>
 
     <EditText
         android:id="@+id/et_add_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp" />
 
     <RelativeLayout
-        android:visibility="gone"
         android:id="@+id/rl_add"
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:visibility="gone">
+
         <ImageView
             android:id="@+id/iv_add_photo"
-            android:src="@drawable/em_default_avatar"
             android:layout_width="50dp"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp"
+            android:src="@drawable/em_default_avatar" />
+
         <TextView
             android:id="@+id/tv_add_name"
-            android:text="名称"
-            android:textSize="20sp"
-            android:layout_toRightOf="@id/iv_add_photo"
             android:layout_width="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_height="wrap_content"/>
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_add_photo"
+            android:text="名称"
+            android:textSize="20sp" />
+
         <Button
             android:id="@+id/bt_add_add"
-            android:text="添加"
-            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="添加" />
     </RelativeLayout>
 </LinearLayout>

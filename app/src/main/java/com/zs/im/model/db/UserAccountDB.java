@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.zs.im.model.dao.UserAccoutTable;
 
+
+//用户账号数据库
 public class UserAccountDB extends SQLiteOpenHelper {
 
     //构造

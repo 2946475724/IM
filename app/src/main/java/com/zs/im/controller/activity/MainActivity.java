@@ -3,7 +3,6 @@ package com.zs.im.controller.activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.RadioGroup;
 
@@ -27,6 +26,18 @@ public class MainActivity extends FragmentActivity {
         initListener();
     }
 
+    private void initView() {
+        rg_main = findViewById(R.id.rg_main);
+    }
+
+    private void initDate() {
+        //创建三个Fragment对象
+        chatFragment = new ChatFragment();
+        contactListFragment = new ContactListFragment();
+        settingFragment = new SettingFragment();
+
+    }
+
     private void initListener() {
         rg_main.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -47,7 +58,7 @@ public class MainActivity extends FragmentActivity {
                         break;
                 }
                 //实现fragment切换的方法
-                switchFragmnet(fragment);
+                switchFragment(fragment);
             }
         });
         //默认选择会话列表页面
@@ -55,20 +66,9 @@ public class MainActivity extends FragmentActivity {
     }
 
     //实现fragment切换的方法
-    private void switchFragmnet(Fragment fragment){
+    private void switchFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.fl_main,fragment).commit();
     }
 
-    private void initDate() {
-        //创建三个Fragment对象
-        chatFragment = new ChatFragment();
-        contactListFragment = new ContactListFragment();
-        settingFragment = new SettingFragment();
-
-    }
-
-    private void initView() {
-        rg_main = findViewById(R.id.rg_main);
-    }
 }

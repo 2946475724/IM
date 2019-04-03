@@ -41,6 +41,7 @@ public class LoginActivity extends Activity {
         bt_login_regist = findViewById(R.id.bt_login_regist);
         bt_login_login = findViewById(R.id.bt_login_login);
     }
+
     private void initListener(){
         //注册按钮的点击事件处理
         bt_login_regist.setOnClickListener(new View.OnClickListener() {
@@ -57,8 +58,6 @@ public class LoginActivity extends Activity {
                 login();
             }
         });
-
-
 
     }
 

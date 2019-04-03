@@ -19,16 +19,19 @@
         android:layout_height="60dp">
         <RadioButton
             android:id="@+id/rb_main_chat"
+            android:drawableTop="@drawable/rb_main_drawable_selector"
             android:text="会话"
             style="@style/MainButtonStyle"/>
         <RadioButton
             android:id="@+id/rb_main_contact"
             android:text="联系人"
+            android:drawableTop="@drawable/rb_main_contact_drawable_selector"
             style="@style/MainButtonStyle"/>
 
         <RadioButton
             android:id="@+id/rb_main_setting"
             android:text="设置"
+            android:drawableTop="@drawable/rb_main_setting_drawable_selector"
             style="@style/MainButtonStyle"/>
     </RadioGroup>
 
