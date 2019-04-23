@@ -49,6 +49,7 @@ public class GroupDetailAdapter extends BaseAdapter {
             mUsers.addAll(0,users);
         }
         notifyDataSetChanged();
+
     }
 
     //添加加号和减号(把加号和减号也当成用户头像来操作)

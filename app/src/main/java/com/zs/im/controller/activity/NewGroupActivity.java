@@ -103,7 +103,7 @@ public class NewGroupActivity extends Activity {
                 }
                 options.style = groupStyle;//创建群的类型
                 try {
-                    EMClient.getInstance().groupManager().createGroup(groupName,groupDesc,members,"申请加入",options);
+                    EMClient.getInstance().groupManager().createGroup(groupName,groupDesc,members,"申请加入群",options);
 
                     runOnUiThread(new Runnable() {
                         @Override

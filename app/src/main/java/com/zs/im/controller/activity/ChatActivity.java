@@ -35,7 +35,7 @@ public class ChatActivity extends FragmentActivity {
     }
 
     private void initData() {
-        //创建一个会话的Fragmnet
+        //创建一个会话的Fragment
         easeChatFragment = new EaseChatFragment();
 
         mHxid = getIntent().getStringExtra(EaseConstant.EXTRA_USER_ID);
@@ -45,7 +45,7 @@ public class ChatActivity extends FragmentActivity {
 
         easeChatFragment.setArguments(getIntent().getExtras());
 
-        //替换fragmnet
+        //替换fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fl_chat,easeChatFragment).commit();
 

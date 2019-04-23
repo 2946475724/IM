@@ -9,6 +9,7 @@ import com.hyphenate.EMContactListener;
 import com.hyphenate.EMGroupChangeListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMucSharedFile;
+import com.hyphenate.chat.adapter.EMAGroupManagerListener;
 import com.zs.im.model.bean.GroupInfo;
 import com.zs.im.model.bean.InvitationInfo;
 import com.zs.im.model.bean.UserInfo;

@@ -56,7 +56,6 @@ public class GroupDetailActivity extends Activity {
             return;
         }else {
             mGroup = EMClient.getInstance().groupManager().getGroup(groupId);
-
         }
     }
 
@@ -70,6 +69,8 @@ public class GroupDetailActivity extends Activity {
         //从环信服务器获取所有群成员
         getMembersFromHxServer();
     }
+
+
 
     private void initButtonDisplay() {
         //判断当前是否是群主
@@ -120,7 +121,6 @@ public class GroupDetailActivity extends Activity {
                     Model.getInstance().getGlobalThreadPool().execute(new Runnable() {
                         @Override
                         public void run() {
-
                             try {
                                 //去环信服务器退群
                                 EMClient.getInstance().groupManager().leaveGroup(mGroup.getGroupId());
@@ -145,8 +145,6 @@ public class GroupDetailActivity extends Activity {
                                     }
                                 });
                             }
-
-
                         }
                     });
                 }
@@ -250,7 +248,7 @@ public class GroupDetailActivity extends Activity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(GroupDetailActivity.this,"删除成功",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(GroupDetailActivity.this,"删除"+user.getName()+"成功",Toast.LENGTH_SHORT).show();
                             }
                         });
                     } catch (final HyphenateException e) {
@@ -272,7 +270,7 @@ public class GroupDetailActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == RESULT_OK){
+        if(resultCode == RESULT_OK){
             //获取返回的准备邀请的群成员信息
             final String[] memberses = data.getStringArrayExtra("members");
 
@@ -287,6 +285,8 @@ public class GroupDetailActivity extends Activity {
                             @Override
                             public void run() {
                                 Toast.makeText(GroupDetailActivity.this,"发送邀请成功",Toast.LENGTH_SHORT).show();
+                                groupDetailAdapter.refresh(mUsers);
+
                             }
                         });
                     } catch (final HyphenateException e) {
@@ -302,6 +302,7 @@ public class GroupDetailActivity extends Activity {
             });
         }
     }
+
 
     //发送退群和解散广播群
     private void exitGroupBroadCast(){
