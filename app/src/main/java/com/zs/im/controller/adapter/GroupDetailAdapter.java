@@ -40,7 +40,6 @@ public class GroupDetailAdapter extends BaseAdapter {
 
     //刷新数据
     public void refresh(List<UserInfo> users){
-
         if(users != null && users.size() >= 0){
             mUsers.clear();
 
@@ -52,15 +51,14 @@ public class GroupDetailAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    //添加加号和减号(把加号和减号也当成用户头像来操作)
     private void initUsers() {
-
         UserInfo add = new UserInfo("add");
         UserInfo delete = new UserInfo("delete");
 
         mUsers.add(delete);
         mUsers.add(0,add);
     }
-
 
     @Override
     public int getCount() {
@@ -85,9 +83,9 @@ public class GroupDetailAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView = View.inflate(mContext, R.layout.item_groupdetail,null);
 
-            holder.photo = convertView.findViewById(R.id.iv_group_detail_photo);
-            holder.delete = convertView.findViewById(R.id.iv_group_detail_delete);
-            holder.name = convertView.findViewById(R.id.tv_group_detail_name);
+            holder.photo = (ImageView) convertView.findViewById(R.id.iv_group_detail_photo);
+            holder.delete = (ImageView) convertView.findViewById(R.id.iv_group_detail_delete);
+            holder.name = (TextView) convertView.findViewById(R.id.tv_group_detail_name);
 
             convertView.setTag(holder);
         }else{
@@ -99,7 +97,7 @@ public class GroupDetailAdapter extends BaseAdapter {
 
         //显示数据
         if(mIsCanModify){//群主或开放了群权限
-            if(position == getCount() - 1){//减号
+            if(position == getCount() - 1){//减号的处理
                 //删除模式判断
                 if(mIsDeleteModel){
                     convertView.setVisibility(View.INVISIBLE);
@@ -122,8 +120,8 @@ public class GroupDetailAdapter extends BaseAdapter {
                 convertView.setVisibility(View.VISIBLE);
                 holder.name.setVisibility(View.VISIBLE);
 
-                holder.name.setText(userInfo.getName());
                 holder.photo.setImageResource(R.drawable.em_default_avatar);
+                holder.name.setText(userInfo.getName());
 
                 if(mIsDeleteModel){
                     holder.delete.setVisibility(View.VISIBLE);
@@ -188,9 +186,7 @@ public class GroupDetailAdapter extends BaseAdapter {
         //添加群成员
         void onAddMembers();
 
-        //删除全成员方法
+        //删除群成员方法
         void onDeleteMembers(UserInfo user);
-
-
     }
 }

@@ -20,7 +20,7 @@
         <RadioButton
             android:id="@+id/rb_main_chat"
             android:drawableTop="@drawable/rb_main_drawable_selector"
-            android:text="会话"
+            android:text="聊天"
             style="@style/MainButtonStyle"/>
         <RadioButton
             android:id="@+id/rb_main_contact"

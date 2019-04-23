@@ -16,7 +16,6 @@ import java.util.List;
 
 //邀请信息列表页面的适配器
 public class InviteAdapter extends BaseAdapter {
-
     private Context mContext;
     private List<InvitationInfo> mInvitationInfos = new ArrayList<>();
     private OnInviteListener mOnInviteListener;
@@ -60,7 +59,6 @@ public class InviteAdapter extends BaseAdapter {
         //1.获取或创建ViewHolder
         ViewHolder holder;
         if (convertView == null) {
-
             holder = new ViewHolder();
             convertView = View.inflate(mContext, R.layout.item_invite, null);
 
@@ -81,7 +79,6 @@ public class InviteAdapter extends BaseAdapter {
         if (user != null) {//联系人
             //名称的展示
             holder.name.setText(invitationInfo.getUser().getName());
-
             holder.accept.setVisibility(View.GONE);
             holder.reject.setVisibility(View.GONE);
 
@@ -92,11 +89,8 @@ public class InviteAdapter extends BaseAdapter {
                 } else {
                     holder.reason.setText(invitationInfo.getReason());
                 }
-
                 holder.accept.setVisibility(View.VISIBLE);
                 holder.reject.setVisibility(View.VISIBLE);
-
-
             }
             else if (invitationInfo.getStatus() == InvitationInfo.InvitationStatus.INVITE_ACCEPT) {//接受邀请
                 if (invitationInfo.getReason() == null) {
@@ -128,10 +122,10 @@ public class InviteAdapter extends BaseAdapter {
                     mOnInviteListener.onReject(invitationInfo);
                 }
             });
+
         } else {//群组
             //显示名称
             holder.name.setText(invitationInfo.getGroup().getInvitePerson());
-
             holder.accept.setVisibility(View.GONE);
             holder.reject.setVisibility(View.GONE);
 
@@ -155,7 +149,6 @@ public class InviteAdapter extends BaseAdapter {
                     break;
                 //你收到了群邀请
                 case NEW_GROUP_INVITE:
-                    holder.reason.setText("你收到了群邀请");
                     holder.accept.setVisibility(View.VISIBLE);
                     holder.reject.setVisibility(View.VISIBLE);
                     //接受邀请
@@ -172,10 +165,10 @@ public class InviteAdapter extends BaseAdapter {
                             mOnInviteListener.onInviteReject(invitationInfo);
                         }
                     });
+                    holder.reason.setText("你收到了群邀请");
                     break;
                 //你收到了群申请
                 case NEW_GROUP_APPLICATION:
-                    holder.reason.setText("你收到了群申请");
                     holder.accept.setVisibility(View.VISIBLE);
                     holder.reject.setVisibility(View.VISIBLE);
                     //接受申请
@@ -192,6 +185,7 @@ public class InviteAdapter extends BaseAdapter {
                             mOnInviteListener.onApplicationReject(invitationInfo);
                         }
                     });
+                    holder.reason.setText("你收到了群申请");
                     break;
                 //你接受了群邀请
                 case GROUP_ACCEPT_INVITE:
@@ -201,14 +195,14 @@ public class InviteAdapter extends BaseAdapter {
                 case GROUP_ACCEPT_APPLICATION:
                     holder.reason.setText("你批准了群申请");
                     break;
-                //你拒绝了群邀请
-                case GROUP_REJECT_INVITE:
-                    holder.reason.setText("你拒绝了群邀请");
-                    break;
-                //你拒绝了群申请
-                case GROUP_REJECT_APPLICATION:
-                    holder.reason.setText("你拒绝了群申请");
-                    break;
+//                //你拒绝了群邀请
+//                case GROUP_REJECT_INVITE:
+//                    holder.reason.setText("你拒绝了群邀请");
+//                    break;
+//                //你拒绝了群申请
+//                case GROUP_REJECT_APPLICATION:
+//                    holder.reason.setText("你拒绝了群申请");
+//                    break;
             }
         }
 

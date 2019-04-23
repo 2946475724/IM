@@ -3,6 +3,7 @@ package com.zs.im.controller.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -31,8 +32,16 @@ public class NewGroupActivity extends Activity {
         setContentView(R.layout.activity_new_group);
 
         initView();
-
         initListener();
+    }
+
+    //初始化view
+    private void initView() {
+        et_newgroup_name = findViewById(R.id.et_newgroup_name);
+        et_newgroup_desc = findViewById(R.id.et_newgroup_desc);
+        cb_newgroup_public = findViewById(R.id.cb_newgroup_public);
+        cb_newgroup_invite = findViewById(R.id.cb_newgroup_invite);
+        bt_newgroup_create = findViewById(R.id.bt_newgroup_create);
     }
 
     private void initListener() {
@@ -65,6 +74,11 @@ public class NewGroupActivity extends Activity {
 
         //群描述
         final String groupDesc = et_newgroup_desc.getText().toString();
+
+        if(TextUtils.isEmpty( groupName ) || TextUtils.isEmpty( groupDesc )){
+            Toast.makeText( NewGroupActivity.this,"群名称和群介绍不能为空！",Toast.LENGTH_SHORT ).show();;
+            return;
+        }
 
         Model.getInstance().getGlobalThreadPool().execute(new Runnable() {
             @Override
@@ -113,12 +127,5 @@ public class NewGroupActivity extends Activity {
         });
     }
 
-    //初始化view
-    private void initView() {
-        et_newgroup_name = findViewById(R.id.et_newgroup_name);
-        et_newgroup_desc = findViewById(R.id.et_newgroup_desc);
-        cb_newgroup_public = findViewById(R.id.cb_newgroup_public);
-        cb_newgroup_invite = findViewById(R.id.cb_newgroup_invite);
-        bt_newgroup_create = findViewById(R.id.bt_newgroup_create);
-    }
+
 }

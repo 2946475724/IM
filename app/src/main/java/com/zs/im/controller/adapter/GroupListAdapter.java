@@ -65,7 +65,6 @@ public class GroupListAdapter extends BaseAdapter {
         hodler.name.setText(emGroup.getGroupName());
         //返回数据
 
-
         return convertView;
     }
 

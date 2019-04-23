@@ -24,6 +24,7 @@ public class DBManager {
     }
 
     public DBManager() {
+
     }
 
     //获取联系人表的操作类对象

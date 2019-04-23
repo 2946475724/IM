@@ -11,7 +11,7 @@ import com.zs.im.model.dao.InviteTable;
 //联系人和邀请信息总数据库
 public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(Context context,String name){
-        super(context,name,null,1);
+        super(context,name+".db",null,1);
     }
 
     @Override

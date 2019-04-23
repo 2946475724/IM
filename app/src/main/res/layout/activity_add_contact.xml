@@ -34,7 +34,8 @@
         android:id="@+id/et_add_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp" />
+        android:layout_margin="10dp"
+        android:hint="联系人的用户名"/>
 
     <RelativeLayout
         android:id="@+id/rl_add"

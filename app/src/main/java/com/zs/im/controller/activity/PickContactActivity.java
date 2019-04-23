@@ -37,7 +37,6 @@ public class PickContactActivity extends Activity {
 
         //获取传递过来的数据
         getData();
-
         initView();
         initData();
         initListener();
@@ -56,6 +55,30 @@ public class PickContactActivity extends Activity {
         if(mExistMembers == null){
             mExistMembers = new ArrayList<>();
         }
+    }
+
+    private void initView() {
+        tv_pick_save = findViewById(R.id.tv_pick_save);
+        lv_pick = findViewById(R.id.lv_pick);
+    }
+
+    private void initData() {
+        //从本地数据库中获取所有联系人的信息
+        List<UserInfo> contacts = Model.getInstance().getDBManager().getContactTableDao().getContacts();
+
+        mPicks = new ArrayList<>();
+        if(contacts != null && contacts.size() >= 0){
+            //转换
+            for(UserInfo contact : contacts){
+                PickContactInfo pickContactInfo = new PickContactInfo(contact, false);
+                mPicks.add(pickContactInfo);
+            }
+        }
+
+        //初始化listView
+        pickContactAdapter = new PickContactAdapter(this,mPicks,mExistMembers);
+
+        lv_pick.setAdapter(pickContactAdapter);
     }
 
     private void initListener() {
@@ -94,27 +117,4 @@ public class PickContactActivity extends Activity {
         });
     }
 
-    private void initData() {
-        //从本地数据库中获取所有联系人的信息
-        List<UserInfo> contacts = Model.getInstance().getDBManager().getContactTableDao().getContacts();
-
-        mPicks = new ArrayList<>();
-        if(contacts != null && contacts.size() >= 0){
-            //转换
-            for(UserInfo contact : contacts){
-                PickContactInfo pickContactInfo = new PickContactInfo(contact, false);
-                mPicks.add(pickContactInfo);
-            }
-        }
-
-        //初始化listView
-        pickContactAdapter = new PickContactAdapter(this,mPicks,mExistMembers);
-
-        lv_pick.setAdapter(pickContactAdapter);
-    }
-
-    private void initView() {
-        tv_pick_save = findViewById(R.id.tv_pick_save);
-        lv_pick = findViewById(R.id.lv_pick);
-    }
 }

@@ -135,7 +135,7 @@ public class InviteActivity extends Activity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(InviteActivity.this,"接受失败",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(InviteActivity.this,"接受邀请失败",Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -241,14 +241,12 @@ public class InviteActivity extends Activity {
         setContentView(R.layout.activity_invite);
 
         initView();
-
         initDate();
     }
 
     private void initView() {
         lv_invite = findViewById(R.id.lv_invite);
     }
-
 
     private void initDate() {
         //初始化Listview
@@ -262,7 +260,6 @@ public class InviteActivity extends Activity {
         mLBM = LocalBroadcastManager.getInstance(this);
         mLBM.registerReceiver(InviteChangedReceiver,new IntentFilter(Constant.CONTACT_INVITE_CHANGED));
         mLBM.registerReceiver(InviteChangedReceiver,new IntentFilter(Constant.GROUP_INVITE_CHANGED));
-
     }
 
     private void refresh(){
@@ -271,7 +268,6 @@ public class InviteActivity extends Activity {
         //刷新适配器
         inviteAdapter.refresh(invitations);
     }
-
 
     @Override
     protected void onDestroy() {

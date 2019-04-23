@@ -17,6 +17,7 @@ public class MainActivity extends FragmentActivity {
     private  ChatFragment chatFragment;
     private  ContactListFragment contactListFragment;
     private  SettingFragment settingFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

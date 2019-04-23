@@ -1,79 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".controller.activity.LoginActivity"
-    android:orientation="vertical">
+    android:background="#EEE0E5">
 
 
     <com.hyphenate.easeui.widget.EaseTitleBar
-        app:titleBarTitle="登陆"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </com.hyphenate.easeui.widget.EaseTitleBar>
+        android:layout_height="wrap_content"
+        app:titleBarTitle="登陆"></com.hyphenate.easeui.widget.EaseTitleBar>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="150dp"
+        android:gravity="center_horizontal">
 
-        <TextView
-           android:text="IM"
-            android:textSize="30dp"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/head"
+            android:layout_gravity="center_vertical" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_margin="10dp"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="5dp"
+        android:background="@color/btn_white_normal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="用户名："
-            android:textSize="25sp"
-            />
+            android:textColor="@android:color/black"
+            android:typeface="normal"
+            android:textStyle="normal"
+            android:textSize="25sp" />
+
         <EditText
             android:id="@+id/et_login_name"
+            android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="50dp"
+            android:background="@null"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_margin="10dp"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:background="@color/btn_white_normal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="密  码："
-            android:textSize="25sp"
-            />
+            android:layout_gravity="center_vertical"
+            android:typeface="normal"
+            android:textStyle="normal"
+            android:text="密   码："
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
         <EditText
-            android:password="true"
             android:id="@+id/et_login_pwd"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:password="true"
+            android:background="@null"/>
     </LinearLayout>
+
     <LinearLayout
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="5dp">
+
         <Button
             android:id="@+id/bt_login_regist"
-            android:text="注册"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+            android:background="@drawable/btn_backgroud"
+            android:text="注册"
+            android:textColor="@color/btn_white_normal" />
+
         <Button
             android:id="@+id/bt_login_login"
-            android:text="登陆"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+            android:background="@drawable/btn_backgroud"
+            android:text="登陆"
+            android:textColor="@color/btn_white_normal" />
     </LinearLayout>
 </LinearLayout>

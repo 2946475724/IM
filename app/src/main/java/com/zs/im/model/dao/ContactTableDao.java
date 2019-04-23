@@ -11,7 +11,6 @@ import java.util.List;
 
 //联系人表的操作类
 public class ContactTableDao {
-
     private DBHelper mHelper;
 
     public ContactTableDao(DBHelper helper) {

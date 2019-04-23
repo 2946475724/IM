@@ -31,8 +31,26 @@ public class ChatActivity extends FragmentActivity {
         setContentView(R.layout.activity_chat);
 
         initData();
-
         initListener();
+    }
+
+    private void initData() {
+        //创建一个会话的Fragmnet
+        easeChatFragment = new EaseChatFragment();
+
+        mHxid = getIntent().getStringExtra(EaseConstant.EXTRA_USER_ID);
+
+        //获取聊天类型
+        mChatType = getIntent().getExtras().getInt(EaseConstant.EXTRA_CHAT_TYPE);
+
+        easeChatFragment.setArguments(getIntent().getExtras());
+
+        //替换fragmnet
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fl_chat,easeChatFragment).commit();
+
+        //获取发送广播的管理者
+        mLBM = LocalBroadcastManager.getInstance(ChatActivity.this);
     }
 
     private void initListener() {
@@ -96,24 +114,5 @@ public class ChatActivity extends FragmentActivity {
             mLBM.registerReceiver(ExitGroupReceiver,new IntentFilter(Constant.EXIT_GROUP));
         }
     }
-
-    private void initData() {
-        //创建一个会话的Fragmnet
-        easeChatFragment = new EaseChatFragment();
-
-        mHxid = getIntent().getStringExtra(EaseConstant.EXTRA_USER_ID);
-
-        //获取聊天类型
-        mChatType = getIntent().getExtras().getInt(EaseConstant.EXTRA_CHAT_TYPE);
-
-        easeChatFragment.setArguments(getIntent().getExtras());
-        //替换fragmnet
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fl_chat,easeChatFragment).commit();
-
-        //获取发送广播的管理者
-        mLBM = LocalBroadcastManager.getInstance(ChatActivity.this);
-    }
-
 
 }

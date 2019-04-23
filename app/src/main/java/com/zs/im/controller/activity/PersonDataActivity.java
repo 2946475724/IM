@@ -21,7 +21,7 @@ import com.zs.im.model.Model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
+
 
 public class PersonDataActivity extends Activity {
 
@@ -67,7 +67,7 @@ public class PersonDataActivity extends Activity {
     public void choosePicture(View view){
         AlertDialog.Builder builder = new AlertDialog.Builder( this );
         builder.setTitle( "选择您的头像方式" );
-        String[] str = {"拍照","从相册李选择"};
+        String[] str = {"拍照","从相册里选择"};
         builder.setItems( str, new DialogInterface.OnClickListener() {//(实现了charsequence的类数组这里用string数组，一个点击事件的监听器)
             @Override
             public void onClick(DialogInterface dialog, int which) {

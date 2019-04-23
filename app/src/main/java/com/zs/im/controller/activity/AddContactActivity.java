@@ -102,6 +102,7 @@ public class AddContactActivity extends Activity {
                             Toast.makeText(AddContactActivity.this, "发送添加好友邀请成功", Toast.LENGTH_SHORT).show();
                         }
                     });
+                    finish();
                 } catch (final HyphenateException e) {
                     e.printStackTrace();
                     runOnUiThread(new Runnable() {
@@ -115,6 +116,5 @@ public class AddContactActivity extends Activity {
             }
         });
     }
-
 
 }

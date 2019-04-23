@@ -25,6 +25,7 @@ public class GroupListActivity extends Activity {
     private ListView lv_grouplist;
     private GroupListAdapter groupListAdapter;
     private LinearLayout ll_grouplist;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,40 +34,15 @@ public class GroupListActivity extends Activity {
         initView();
         initData();
         initListener();
-
     }
 
-    private void initListener() {
-        //list条目的点击监听事件
-        lv_grouplist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    private void initView() {
+        lv_grouplist = findViewById(R.id.lv_grouplist);
+        //添加头布局
+        View headerView = View.inflate(this,R.layout.header_grouplist,null);
+        lv_grouplist.addHeaderView(headerView);
 
-                if(position == 0){
-                    return;
-                }
-
-                Intent intent = new Intent(GroupListActivity.this, ChatActivity.class);
-
-                //会话类型
-                intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE,EaseConstant.CHATTYPE_GROUP);
-
-                //群id
-                EMGroup emGroup = EMClient.getInstance().groupManager().getAllGroups().get(position - 1);
-                intent.putExtra(EaseConstant.EXTRA_USER_ID,emGroup.getGroupId());
-                startActivity(intent);
-            }
-        });
-
-        //跳转到新建群
-        ll_grouplist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(GroupListActivity.this, NewGroupActivity.class);
-
-                startActivity(intent);
-            }
-        });
+        ll_grouplist = headerView.findViewById(R.id.ll_grouplist);
     }
 
     private void initData() {
@@ -75,7 +51,6 @@ public class GroupListActivity extends Activity {
         lv_grouplist.setAdapter(groupListAdapter);
         //从环信服务器获取所有群的信息
         getGroupsFromServer();
-
     }
 
     private void getGroupsFromServer() {
@@ -109,20 +84,41 @@ public class GroupListActivity extends Activity {
 
     }
 
+    private void initListener() {
+        //list条目的点击监听事件
+        lv_grouplist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 0){
+                    return;
+                }
+
+                Intent intent = new Intent(GroupListActivity.this, ChatActivity.class);
+                //会话类型
+                intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE,EaseConstant.CHATTYPE_GROUP);
+                //群id
+                EMGroup emGroup = EMClient.getInstance().groupManager().getAllGroups().get(position - 1);
+                intent.putExtra(EaseConstant.EXTRA_USER_ID,emGroup.getGroupId());
+                startActivity(intent);
+            }
+        });
+
+        //跳转到新建群
+        ll_grouplist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GroupListActivity.this, NewGroupActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+
     //刷新
     private void refresh(){
         groupListAdapter.refresh(EMClient.getInstance().groupManager().getAllGroups());
     }
 
-    private void initView() {
-
-        lv_grouplist = findViewById(R.id.lv_grouplist);
-        //添加头布局
-        View headerView = View.inflate(this,R.layout.header_grouplist,null);
-        lv_grouplist.addHeaderView(headerView);
-
-        ll_grouplist = headerView.findViewById(R.id.ll_grouplist);
-    }
 
     @Override
     protected void onResume() {

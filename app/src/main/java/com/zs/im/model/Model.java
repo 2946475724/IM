@@ -27,6 +27,7 @@ public class Model {
     public static Model getInstance(){
         return model;
     }
+
     public void init(Context context){
         mContext = context;
 
