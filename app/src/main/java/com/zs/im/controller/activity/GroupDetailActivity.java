@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hyphenate.chat.EMClient;
@@ -28,6 +30,9 @@ public class GroupDetailActivity extends Activity {
 
     private GridView gv_groupdetail;
     private Button bt_groupdetail_out;
+    private TextView tv_groupdetail_groupname;
+    private TextView tv_groupdetail_describe;
+    private Toolbar toolbar;
     private EMGroup mGroup;
     private List<UserInfo> mUsers;
     private GroupDetailAdapter groupDetailAdapter;
@@ -46,6 +51,9 @@ public class GroupDetailActivity extends Activity {
     private void initView() {
         gv_groupdetail = findViewById(R.id.gv_groupdetail);
         bt_groupdetail_out = findViewById(R.id.bt_groupdetail_out);
+        tv_groupdetail_groupname = findViewById( R.id.tv_groupdetail_groupname );
+        tv_groupdetail_describe = findViewById( R.id.tv_groupdetail_describe );
+        toolbar = findViewById( R.id.toolbar );
     }
 
     //获取传递过来的数据
@@ -60,8 +68,18 @@ public class GroupDetailActivity extends Activity {
     }
 
     private void initData() {
+
+        toolbar.setNavigationOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        } );
         //初始化button显示
         initButtonDisplay();
+
+        //初始化群名称
+        initGroupInfo();
 
         //初始化gridview
         initGridview();
@@ -70,6 +88,12 @@ public class GroupDetailActivity extends Activity {
         getMembersFromHxServer();
     }
 
+    private void initGroupInfo() {
+        String groupName = mGroup.groupSubject();
+        String groupDescribe = mGroup.getDescription();
+        tv_groupdetail_groupname.setText( groupName );
+        tv_groupdetail_describe.setText( groupDescribe );
+    }
 
 
     private void initButtonDisplay() {

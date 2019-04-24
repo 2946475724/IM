@@ -15,7 +15,7 @@
         android:layout_height="match_parent"/>
 
     <ImageView
-        android:src="@drawable/logo"
+        android:src="@drawable/em_default_avatar"
         android:layout_width="50dp"
         android:layout_marginLeft="10dp"
         android:layout_height="50dp"/>

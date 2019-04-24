@@ -12,7 +12,8 @@
     <com.hyphenate.easeui.widget.EaseTitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleBarTitle="登陆"></com.hyphenate.easeui.widget.EaseTitleBar>
+        app:titleBarTitle="登陆">
+    </com.hyphenate.easeui.widget.EaseTitleBar>
 
     <LinearLayout
         android:layout_width="match_parent"
